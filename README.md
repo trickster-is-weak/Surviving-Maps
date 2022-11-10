@@ -55,11 +55,15 @@ OS:           Mac OS X 12.6.1 x86_64
 
 ### Downloading the Code
 
-As should be said with any code run from the internet, there are risks involved. I haven't tested this on any machines but my own. 
-This is the point where you are downloading and running software that is unverified and probably contains bugs. 
-Java's Virtual Machine should prevent these bugs causing system instabilities, but I take no responsibility whatsoever. 
+As should be said with any code run from the internet, there are risks involved. I haven't tested this on any machines
+but my own.
+This is the point where you are downloading and running software that is unverified and probably contains bugs.
+Java's Virtual Machine should prevent these bugs causing system instabilities, but I take no responsibility whatsoever.
 
-The complete code can be downloaded from the green "code" button on the github page. You can then choose to download the code as a zip, or using git if you have that installed. After you have it downloaded and unzipped, open a Terminal/Command Prompt at this location.
+The complete code can be downloaded from the green "code" button on
+the [github page](https://github.com/trickster-is-weak/Surviving-Maps). You can then choose to download the code as a
+zip, or using git if you have that installed. After you have it downloaded and unzipped, open a Terminal/Command Prompt
+at this location.
 
 #### Verification
 
