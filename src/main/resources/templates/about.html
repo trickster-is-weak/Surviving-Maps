@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Surviving Maps</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <template th:include="fragments/fragments :: header" th:remove="tag"></template>
+    <link rel="stylesheet" th:href="@{css/custom.css}">
+
+</head>
+
+<body>
+
+<nav th:include="fragments/fragments :: navigation"></nav>
+
+<div style="padding-top: 100px"/>
+
+<div id="aboutId" th:include="fragments/aboutFragments :: aboutList(${list})"/>
+
+
+<div style="padding-top: 100px"/>
+<footer style="padding-top: 100px" th:include="fragments/fragments :: footer"></footer>
+
+</body>
+</html>

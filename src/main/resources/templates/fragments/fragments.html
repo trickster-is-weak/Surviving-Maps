@@ -1,0 +1,293 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Surviving Maps</title>
+</head>
+
+<th:block th:fragment="header">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.1/css/bootstrap-multiselect.css"
+          rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha512-fp+kGodOXYBIPyIXInWgdH2vTMiOfbLC9YqwEHslkUxc8JLI7eBL2UQ8/HbB5YehvynU3gA3klc84rAQcTQvXA=="
+            referrerpolicy="no-referrer"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.1/js/bootstrap-multiselect.min.js"></script>
+
+    <script crossorigin="anonymous"
+            integrity="sha512-SGWgwwRA8xZgEoKiex3UubkSkV1zSE1BS6O4pXcaxcNtUlQsOmOmhVnDwIvqGRfEmuz83tIGL13cXMZn6upPyg=="
+            referrerpolicy="no-referrer"
+            src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <link href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <script crossorigin="anonymous"
+            integrity="sha384-3Lbbtzx06nhCsUSyejLUs20aGY+vwYUFAlrAlylsrsTtjUNHB7zQqUXdk21ajIQK"
+            src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+
+    <script th:src="@{/js/functions.js}"></script>
+    <style th:src="@{/css/custom.css}"/>
+    <link rel="shortcut icon" th:href="@{/img/Logo.png}" type="image/png"/>
+    <style th:include="fragments/fragments :: icons"/>
+
+
+</th:block>
+
+<th:block th:fragment="navigation">
+    <nav aria-label="navigationDiv" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Surviving Maps</a>
+            <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    data-bs-target="#navbarNavDropdown" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"
+                           th:classappend="${#httpServletRequest.getRequestURI().equals('/') ? 'active':''}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/simple"
+                           th:classappend="${#httpServletRequest.getRequestURI().startsWith('/simple') ? 'active':''}">
+                            Simple
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/complex"
+                           th:classappend="${#httpServletRequest.getRequestURI().startsWith('/complex') ? 'active':''}">
+                            Complex
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/faq"
+                           th:classappend="${#httpServletRequest.getRequestURI().startsWith('/faq') ? 'active':''}">
+                            FAQ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <script crossorigin="anonymous" src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
+                <script type='text/javascript'>
+                    kofiwidget2.init('Help Support Hosting Costs', '#8b0000', 'Y8Y1DDS0X');
+                    kofiwidget2.draw();
+                </script>
+            </div>
+        </div>
+    </nav>
+
+</th:block>
+
+<th:block th:fragment="footer">
+
+    <nav aria-label="footerDiv" class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom">
+        <div class="container-fluid row">
+            <div class="collapse navbar-collapse" id="navbown">
+                <div class="col-8 text-white">
+                    This website has no guarantees and has been developed as a hobby project
+                </div>
+                <div class="col-4">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/support">
+                                Support Development
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contribute">
+                                Contribute
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</th:block>
+
+<th:style th:fragment="icons">
+
+    td {
+    text-align: center;
+    vertical-align: middle;
+    }
+
+    .icon-resource {
+    background-repeat: no-repeat;
+    background-position: left;
+    width: 20px;
+    height: 18px;
+    background-size: 18px;
+    }
+    .icon-select {
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-size: 18px;
+    }
+    .icon-select > button {
+    background: inherit !important;
+    text-indent: 20px;
+    }
+
+    .icon-resource > .hover-content {
+    display: none;
+    position: relative;
+    top: 20px;
+    width: 100px;
+    }
+    .icon-resource:hover > .hover-content {
+    display: block
+    }
+    .icon-raremetals {
+    background-image: url([[@{img/icons/raremetals.png}]])
+    }
+    .icon-metals {
+    background-image: url([[@{img/icons/metals.png}]])
+    }
+    .icon-water {
+    background-image: url([[@{img/icons/water.png}]])
+    }
+    .icon-concrete {
+    background-image: url([[@{img/icons/concrete.png}]])
+    }
+    .icon-devils {
+    background-image: url([[@{img/icons/dust_d.png}]])
+    }
+    .icon-storms {
+    background-image: url([[@{img/icons/dust_s.png}]])
+    }
+    .icon-cold {
+    background-image: url([[@{img/icons/cold.png}]])
+    }
+    .icon-meteors {
+    background-image: url([[@{img/icons/meteors.png}]])
+    }
+</th:style>
+
+
+<th:block th:fragment="concrete(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-concrete">
+            <div class="hover-content">
+                Concrete
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="water(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-water">
+            <div class="hover-content">
+                Water
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="metal(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-metals">
+            <div class="hover-content">
+                Metal
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="rare-metal(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-raremetals">
+            <div class="hover-content">
+                Rare Metal
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+<th:block th:fragment="resource(type, value)">
+    <div th:switch="${type}">
+        <div th:case="CONCRETE" th:include="fragments/fragments :: concrete(${value})"/>
+        <div th:case="WATER" th:include="fragments/fragments :: water(${value})"/>
+        <div th:case="METAL" th:include="fragments/fragments :: metal(${value})"/>
+        <div th:case="RARE_METAL" th:include="fragments/fragments :: rare-metal(${value})"/>
+    </div>
+</th:block>
+
+<th:block th:fragment="disaster(type, value)">
+    <div th:switch="${type}">
+        <div th:case="DUST_DEVILS" th:include="fragments/fragments :: dust_devils(${value})"/>
+        <div th:case="DUST_STORMS" th:include="fragments/fragments :: dust_storms(${value})"/>
+        <div th:case="METEORS" th:include="fragments/fragments :: meteors(${value})"/>
+        <div th:case="COLD_WAVES" th:include="fragments/fragments :: cold_waves(${value})"/>
+    </div>
+</th:block>
+
+
+<th:block th:fragment="dust_devils(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-devils">
+            <div class="hover-content">
+                Dust Devils
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="dust_storms(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-storms">
+            <div class="hover-content">
+                Dust Storms
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="cold_waves(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-cold">
+            <div class="hover-content">
+                Cold Waves
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="meteors(value)">
+    <div style="display: flex; align-items: center;align-content: center;">
+        <div th:text="${value}"></div>
+        <div class="icon-resource icon-meteors">
+            <div class="hover-content">
+                Meteor Showers
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

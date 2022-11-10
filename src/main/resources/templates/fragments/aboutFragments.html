@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Surviving Maps</title>
+</head>
+
+<th:block th:fragment="aboutList(list)">
+    <div class="container">
+        <div class="accordion" id="accordionExample">
+
+            <th:block id="block" th:each="update, iterStat  : ${list}">
+                <div class="card">
+                    <div class="card-header" th:id="'heading'+ ${iterStat.index}">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" data-toggle="collapse"
+                                    th:aria-controls="'demo'+ ${iterStat.index}"
+                                    th:aria-expanded="${iterStat.index}==0 ? 'true' : 'false'"
+                                    th:data-target="${'#demo'+iterStat.index}"
+                                    th:text="'Update '+ ${update.formatted()}"
+                                    type="button">
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="collapse" data-parent="#accordionExample"
+                         th:aria-labelledby="'heading'+ ${iterStat.index}"
+                         th:classappend="${iterStat.index}==0 ? 'show' : ''" th:id="'demo'+ ${iterStat.index}">
+                        <div class="card-body">
+                            <ul>
+                                <th:block id="block" th:each="item  : ${update.items()}">
+                                    <li th:text="${item}"></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+
+</th:block>
+</html>

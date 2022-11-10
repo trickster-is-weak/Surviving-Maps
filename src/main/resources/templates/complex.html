@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Surviving Maps</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <object th:include="fragments/fragments :: header" th:remove="tag"/>
+    <link rel="stylesheet" th:href="@{css/custom.css}">
+</head>
+
+<body>
+
+<nav th:include="fragments/fragments :: navigation"></nav>
+<div class="container" style="padding-top: 70px"/>
+
+<div>
+    <form class="mainform border-bottom" id="main_form"
+          method="post" th:action="@{/complex}"
+          th:object="${filter}">
+
+        <div class="form-group">
+            <div>
+                Other
+                <div class="row h-50 border" style="padding: 10px">
+                    <div class="col-md-3">
+                        <label class="d-flex justify-content-between" for="gameVariant">Game Variant </label>
+                        <select class="multiselect dropdown-toggle custom-select text-center" id="gameVariant"
+                                th:field="*{variant}">
+                            <option th:each="state : ${T(uk.co.brett.surviving.enums.GameVariant).values()}"
+                                    th:text="${state.getFormatted()}"
+                                    th:value="${state}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-3" id="breakThruDiv">
+                        <div id="innerBTR">
+                            <label class="d-flex justify-content-between" for="example-reset">
+                                Breakthroughs
+                                <span class="ml-auto" onclick="resetBreakthroughs()">
+                            <em class="bi bi-x-circle pointer"
+                                id="example-reset-button"
+                                title="Clear Selected"></em>
+                        </span>
+                            </label>
+                            <select id="example-reset" multiple="multiple" th:field="*{breakthroughs}">
+                                <option th:each="state : ${breakthroughs}"
+                                        th:text="${state.getFormatted()}"
+                                        th:value="${state}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 10px"></div>
+            <div id="resources">
+                Resources
+                <div class="row h-50 border" style="padding: 10px">
+                    <div class="col-md-3" id="waterSelect">
+                        <label for="water">Water</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="waterOp"
+                                        th:field="*{water.op}" th:onchange="checkEnable('water')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="water"
+                                        th:field="*{water.value}" th:onchange="checkEnable('water')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="concrete">Concrete</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="concreteOp"
+                                        th:field="*{concrete.op}" th:onchange="checkEnable('concrete')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="concrete"
+                                        th:field="*{concrete.value}">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="metal">Metal</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="metalOp"
+                                        th:field="*{metals.op}" th:onchange="checkEnable('metal')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="metal"
+                                        th:field="*{metals.value}">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="raremetal">Rare Metal</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="raremetalOp"
+                                        th:field="*{rareMetals.op}" th:onchange="checkEnable('raremetal')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="raremetal"
+                                        th:field="*{rareMetals.value}">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 10px"></div>
+            <div id="disasters">
+                Disasters
+                <div class="row h-50 border" style="padding: 10px">
+                    <div class="col-md-3" id="meteorSelect">
+                        <label for="meteor">Meteors</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="meteorOp"
+                                        th:field="*{meteors.op}" th:onchange="checkEnable('meteor')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="meteor"
+                                        th:field="*{meteors.value}" th:onchange="checkEnable('water')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="coldwaves">Cold Waves</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="coldwavesOp"
+                                        th:field="*{coldWaves.op}" th:onchange="checkEnable('coldwaves')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="coldwaves"
+                                        th:field="*{coldWaves.value}">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dustStorm">Dust Storms</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="dustStormOp"
+                                        th:field="*{dustStorms.op}" th:onchange="checkEnable('dustStorm')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="dustStorm"
+                                        th:field="*{dustStorms.value}">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dustDevil">Dust Devils</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <select class="multiselect dropdown-toggle custom-select" id="dustDevilOp"
+                                        th:field="*{dustDevils.op}" th:onchange="checkEnable('dustDevil')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="dustDevil"
+                                        th:field="*{dustDevils.value}">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.ComplexPrevalence).values()}"
+                                            th:text="${state.getRating()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 10px"></div>
+            <div id="mapDetails">
+                Map Details
+                <div class="row h-50 border" style="padding: 10px">
+                    <div class="col-md-3" id="landingAreaDiv">
+                        <div id="innerNLA">
+                            <label class="d-flex justify-content-between" for="landingArea-reset">
+                                Named Landing Area
+                                <span class="ml-auto" onclick="resetMultiSelect('landingArea-reset')">
+                            <em class="bi bi-x-circle pointer"
+                                id="landing-reset-button"
+                                title="Clear Selected"></em>
+                        </span>
+                            </label>
+                            <select id="landingArea-reset" multiple="multiple" th:field="*{namedLandingAreas}">
+                                <option th:each="state : ${landingAreas}"
+                                        th:text="${state.getFormatted()}"
+                                        th:value="${state}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3" id="topographyDiv">
+                        <div id="innerTopo">
+                            <label class="d-flex justify-content-between" for="landingArea-reset">
+                                Topography
+                                <span class="ml-auto" onclick="resetMultiSelect('topography-reset')">
+                            <em class="bi bi-x-circle pointer"
+                                id="topography-reset-button"
+                                title="Clear Selected"></em>
+                        </span>
+                            </label>
+                            <select id="topography-reset" multiple="multiple" th:field="*{topographies}">
+                                <option th:each="state : ${topography}"
+                                        th:text="${state.getFormatted()}"
+                                        th:value="${state}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3" id="mapNameDiv">
+                        <div id="innerMapName">
+                            <label class="d-flex justify-content-between" for="landingArea-reset">
+                                Map Name
+                                <span class="ml-auto" onclick="resetMultiSelect('map-name-reset')">
+                            <em class="bi bi-x-circle pointer"
+                                id="map-name-reset-button"
+                                title="Clear Selected"></em>
+                        </span>
+                            </label>
+                            <select id="map-name-reset" multiple="multiple" th:field="*{mapNames}">
+                                <option th:each="state : ${mapName}"
+                                        th:text="${state.getFormatted()}"
+                                        th:value="${state}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3" id="challengeFilter">
+                        <label for="mapDifficultiesOp">Challenge Difficulty</label>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <select class="multiselect dropdown-toggle custom-select" id="mapDifficultiesOp"
+                                        th:field="*{mapDifficultiesOp}" th:onchange="checkEnable('mapDifficulties')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Operator).values()}"
+                                            th:text="${state.getFormatted()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <select class="multiselect dropdown-toggle custom-select" disabled id="mapDifficulties"
+                                        th:field="*{mapDifficultiesInt}" th:onchange="checkEnable('mapDifficulties')">
+                                    <option th:each="state : ${T(uk.co.brett.surviving.filters.Difficulties).values()}"
+                                            th:text="${state.getValue()}"
+                                            th:value="${state}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="border" id="displayViewer" onclick="getDisplay()"
+     style="padding-top: 20px;padding-bottom: 20px; min-height: 80px; ">
+    <div style="text-align: center; vertical-align: central; padding: 5px">
+        Select a landing site for more information
+    </div>
+</div>
+
+<div style="padding: 10px"/>
+
+<div id="tableDiv" th:include="fragments/simpleFragments :: table(${sites})">
+
+</div>
+
+
+<div style="padding: 70px"/>
+<footer th:include="fragments/fragments :: footer"></footer>
+
+</body>
+
+</html>

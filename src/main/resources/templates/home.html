@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Surviving Maps</title>
+
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <object th:include="fragments/fragments :: header" th:remove="tag"></object>
+</head>
+
+<body>
+
+
+<nav th:include="fragments/fragments :: navigation"></nav>
+
+<div style="padding-top: 100px"/>
+<div class="container">
+    <h1>Welcome...</h1>
+    <p>
+        This project has been started to provide the community with a tool to find Landing Sites for missions on
+        Surviving Mars.
+        At the moment, this is a work-in progress, but please feel free to suggest features/improvements on <a
+            href="https://github.com/trickster-is-weak/Surviving-Maps">GitHub</a>. However, this is a hobby project and
+        other things come first.
+    </p>
+    <p>
+        The majority of pages link back to here for now... but as features get added I will try to keep the change notes
+        updated in the <a th:href="@{about}">about</a> page, as well as on github.
+    </p>
+</div>
+
+<footer th:include="fragments/fragments :: footer"></footer>
+
+</body>
+</html>

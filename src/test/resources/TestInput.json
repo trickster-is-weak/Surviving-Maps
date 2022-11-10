@@ -1,0 +1,26 @@
+{
+  "GREEN_PLANET": {
+    "resourceLocation": "/Trim MapData Picard C2 Breakthroughs GP.csv",
+    "hash": "bbf7540db687c7e76dd64fc0e0834070ded73cecfec2b6ca11e342ba44bf51ce"
+  },
+  "BEYOND_GREEN": {
+    "resourceLocation": "/Trim MapData Picard C2 Breakthroughs GP BB.csv",
+    "hash": "7b0ba45fb9815d163f2f9b3f433bd7ccd31df4c1d9bad84e0a9eb5e2b9d92e08"
+  },
+  "BELOW_BEYOND": {
+    "resourceLocation": "/Trim MapData Picard C2 Breakthroughs BB.csv",
+    "hash": "e843bcede482e16337090533d00785ce55da813bef6330ebf64405d9e2993008"
+  },
+  "STANDARD": {
+    "resourceLocation": "/Trim MapData Picard C2 Breakthroughs.csv",
+    "hash": "ee9cbed3c221bd7d1b819dbe6ae699a77d53673a4a7403a9d06c20b674d26eb1"
+  },
+  "TITO_GREEN_PLANET": {
+    "resourceLocation": "/Trim MapData Tito GP.csv",
+    "hash": "2a66951b61ec408972b4def95c2af3fa3bbd37ee700b86fb45744b25aa6ed86c"
+  },
+  "EVANS_GREEN_PLANET": {
+    "resourceLocation": "/Trim MapData Evans GP.csv",
+    "hash": "e940eef9b9f988200774abf84629d328f44d1d13e39bfea8bbfb8b0de3ad698c"
+  }
+}

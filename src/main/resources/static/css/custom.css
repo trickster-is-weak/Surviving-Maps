@@ -1,0 +1,23 @@
+tr.selected {
+    background-color: #a6a6a6;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.multiselect.dropdown-toggle {
+    text-align: left !important
+}
+
+#example-reset-button {
+    cursor: pointer;
+}
+
+.loading-icon {
+    color: darkred;
+}

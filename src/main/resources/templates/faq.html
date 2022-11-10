@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Surviving Maps</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <object th:include="fragments/fragments :: header" th:remove="tag"/>
+    <link rel="stylesheet" th:href="@{css/custom.css}">
+
+</head>
+
+<body>
+
+<nav th:include="fragments/fragments :: navigation"></nav>
+<div class="container" style="padding-top: 70px;padding-bottom: 70px;"/>
+<div class="container">
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button aria-controls="collapseOne" aria-expanded="true" class="btn btn-link btn-block text-left"
+                            data-target="#collapseOne" data-toggle="collapse" type="button">
+                        What is this?
+                    </button>
+                </h2>
+            </div>
+
+            <div aria-labelledby="headingOne" class="collapse show" data-parent="#accordionExample" id="collapseOne">
+                <div class="card-body">
+                    This is a web-app designed for players of Surviving Mars to be able to locate a landing area that is
+                    suitable for the mission they are planning.
+                    It allows a landing area to be chosen based on the resources, distasters and breakthroughs, as well
+                    as some more advanced settings, such as topography.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button aria-controls="collapseTwo" aria-expanded="false"
+                            class="btn btn-link btn-block text-left collapsed"
+                            data-target="#collapseTwo" data-toggle="collapse" type="button">
+                        What is the source of the data?
+                    </button>
+                </h2>
+            </div>
+            <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionExample" id="collapseTwo">
+                <div class="card-body">
+                    The data is provided by ChoGGi, and is used in this model in the original CSV format provided.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button aria-controls="collapseThree" aria-expanded="false"
+                            class="btn btn-link btn-block text-left collapsed"
+                            data-target="#collapseThree" data-toggle="collapse" type="button">
+                        How do I report a bug? Or ask for a feature?
+                    </button>
+                </h2>
+            </div>
+            <div aria-labelledby="headingThree" class="collapse" data-parent="#accordionExample" id="collapseThree">
+                <div class="card-body">
+                    Please raise any bugs/feature requests on GitHub.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                    <button aria-controls="collapseFour" aria-expanded="false"
+                            class="btn btn-link btn-block text-left collapsed"
+                            data-target="#collapseFour" data-toggle="collapse" type="button">
+                        How can I help?
+                    </button>
+                </h2>
+            </div>
+            <div aria-labelledby="headingFour" class="collapse" data-parent="#accordionExample" id="collapseFour">
+                <div class="card-body">
+                    <p>
+                        Honestly, the development work is almost done, however, I'm no expert in the web side of things.
+                        So if
+                        you are a web-developer with HTML, Javascript or CSS knowledge, feel free to get in touch.
+                    </p>
+                    <p>Otherwise, please consider donating to the Ko-Fi link at the top. The hosting costs me £10 per
+                        month, and I've made the decision to see how the funding is going every 3 months.
+                        At the moment, 80% of the costs have been from me. Even a small donation helps.</p>
+                    <p> Alternatively, if you have a web-server that can host a Spring Boot app for free, the community
+                        will be grateful.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h2 class="mb-0">
+                    <button aria-controls="collapseFive" aria-expanded="false"
+                            class="btn btn-link btn-block text-left collapsed"
+                            data-target="#collapseFive" data-toggle="collapse" type="button">
+                        When is the next update?
+                    </button>
+                </h2>
+            </div>
+            <div aria-labelledby="headingFive" class="collapse" data-parent="#accordionExample" id="collapseFive">
+                <div class="card-body">
+                    <p> Good Question... I don't know is the honest answer. It will depend on a few things like: bugs,
+                        features and efficiency improvements.
+                        I try to test the updates locally before any update, both using automated and manual testing,
+                        but that's not perfect.</p>
+                    <p> Any small bugs are usually ironed out fairly quickly, but I can only address what I know, so
+                        please raise bug reports.</p>
+                    <p>Features are done on a slower timeframe, so maybe monthly. The about page shows the change
+                        log.</p>
+                    <p>Efficiency improvements are usually addressed when they cause issues.
+                        For example, in the first few weeks, I managed to reduce the RAM footprint substantially and
+                        that cut the hosting costs down and made the user experience marginally faster.
+                        These take a while and I don't envisage many of these occurring. When these backend changes take
+                        place, I try to leave the frontend the same to narrow down sources of error. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding-top: 100px"/>
+<footer style="padding-top: 100px" th:include="fragments/fragments :: footer"></footer>
+
+</body>
+</html>

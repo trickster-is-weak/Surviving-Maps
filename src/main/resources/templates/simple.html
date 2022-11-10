@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Surviving Maps</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <object th:include="fragments/fragments :: header" th:remove="tag"/>
+    <link rel="stylesheet" th:href="@{css/custom.css}">
+
+</head>
+
+<body>
+
+<nav th:include="fragments/fragments :: navigation"></nav>
+
+
+<div class="container border" style="padding-top: 70px;padding-bottom: 70px;">
+
+    <div id="formDiv" th:include="fragments/simpleFragments :: filter(${filter})"></div>
+
+    <div style="padding: 10px"/>
+
+    <div class="border" id="displayViewer" onclick="getDisplay()"
+         style="padding-top: 20px;padding-bottom: 20px; min-height: 80px; ">
+        <div style="text-align: center; vertical-align: central; padding: 5px">
+            Select a landing site for more information
+        </div>
+    </div>
+
+    <div style="padding: 10px"/>
+
+    <div id="tableDiv" th:include="fragments/simpleFragments :: table(${sites})">
+
+    </div>
+
+</div>
+
+
+<div style="padding-top: 100px"/>
+<footer style="padding-top: 100px" th:include="fragments/fragments :: footer"></footer>
+
+</body>
+
+</html>

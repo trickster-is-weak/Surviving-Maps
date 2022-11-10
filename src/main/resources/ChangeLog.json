@@ -1,0 +1,40 @@
+[
+  {
+    "date": "19 06 2022",
+    "items": [
+      "Added Options for B&B and B&B+GP",
+      "Added temp content to other pages"
+    ]
+  },
+  {
+    "date": "21 06 2022",
+    "items": [
+      "Added favicon",
+      "Added KoFi link",
+      "Added Content to homepage",
+      "Added about page",
+      "Updated Resource Management"
+    ]
+  },
+  {
+    "date": "03 07 2022",
+    "items": [
+      "Refactoring database impl to reduce RAM footprint",
+      "Removing unused code",
+      "Adding Evans and Tito Game Data (only GP)",
+      "Refactored site ingest for game variants",
+      "Adding fix to make North/East the origin",
+      "Changing model for input files",
+      "Tidying up logging",
+      "Removing junk from html",
+      "Flags for test vs live data"
+    ]
+  },
+  {
+    "date": "22 08 2022",
+    "items": [
+      "Fixing bug with rare metals",
+      "Adding complex filter functionality"
+    ]
+  }
+]
