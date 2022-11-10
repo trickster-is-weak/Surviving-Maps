@@ -99,13 +99,6 @@ configurations {
     }
 }
 
-sonarqube {
-    properties {
-        property "sonar.host.url", "http://sb00020.ddns.net:62450"
-        property "sonar.login", "8e8f2945ceb4eb565677e0af50aec6fa60c95a48"
-    }
-}
-
 application {
     mainClass = 'uk.co.brett.surviving.SpringApplication'
 }
