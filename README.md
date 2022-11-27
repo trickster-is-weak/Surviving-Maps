@@ -7,6 +7,17 @@ However, due to the generosity of other users, we might be able to get back up a
 ## So what's this?
 This is a repository to allow users to run the code themselves on their own computer. This is likely to be a stop gap, but some users might choose to run it locally or modify it if they want to dabble in some coding.
 
+<details>
+  <summary>Click me for change log</summary>
+
+### Change Log
+Version 0.6: 27/11/2022
+* Fixing breakthrough bug in complex
+* Updating JavaScript functions for complex/simple
+* Changing functionality of Complex Filter to use QueryDSL
+* Adding database caching to speed up subsequent launches
+</details>
+
 ## How do I install it?
 
 ### Precursors
