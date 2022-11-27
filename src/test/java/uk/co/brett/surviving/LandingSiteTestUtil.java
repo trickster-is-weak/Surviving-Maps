@@ -2,6 +2,7 @@ package uk.co.brett.surviving;
 
 import org.apache.commons.math3.random.RandomDataGenerator;
 import uk.co.brett.surviving.enums.*;
+import uk.co.brett.surviving.filters.Difficulties;
 import uk.co.brett.surviving.io.ImmutableLandingSiteFlat;
 import uk.co.brett.surviving.io.LandingSiteFlat;
 
@@ -27,7 +28,7 @@ public class LandingSiteTestUtil {
                 .longitude(getInt(0, 180))
                 .eastWest(compassPicker(false))
                 .topography(getRandomEnum(Topography.class))
-                .difficulty(getInt(100, 190))
+                .difficulty(getRandomEnum(Difficulties.class).getValue())
                 .altitude(getInt(-5000, 5000))
                 .temperature(getInt(-100, -10))
                 .metals(getInt(1, 4))

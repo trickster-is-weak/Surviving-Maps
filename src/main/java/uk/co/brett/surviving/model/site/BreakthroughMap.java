@@ -3,6 +3,7 @@ package uk.co.brett.surviving.model.site;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import uk.co.brett.surviving.enums.Breakthrough;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static org.hibernate.annotations.CascadeType.ALL;
 import static uk.co.brett.surviving.enums.GameVariant.*;
 
 @Entity
@@ -26,26 +28,32 @@ public class BreakthroughMap {
     private Breakthrough breakthrough;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = ALL)
     @ElementCollection
     private List<Long> standard;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = ALL)
     @ElementCollection
     private List<Long> greenPlanet;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = ALL)
     @ElementCollection
     private List<Long> belowBeyond;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = ALL)
     @ElementCollection
     private List<Long> belowBeyondGreenPlanet;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = ALL)
     @ElementCollection
     private List<Long> titoGreenPlanet;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = ALL)
     @ElementCollection
     private List<Long> evansGreenPlanet;
 

@@ -15,15 +15,15 @@ import static uk.co.brett.surviving.enums.ResourceType.*;
 @JsonSerialize
 public class ComplexFilterRequest {
     private final OperatorValue defaultVal = new OperatorValue();
-    private  GameVariant variant;
-    private  List<Breakthrough> breakthroughs;
+    private GameVariant variant;
+    private List<Breakthrough> breakthroughs;
 
-    private  Operator mapDifficultiesOp;
-    private  Difficulties mapDifficultiesInt;
-    private  List<NamedLandingArea> namedLandingAreas;
-    private  List<Topography> topographies;
+    private Operator mapDifficultiesOp;
+    private Difficulties mapDifficultiesInt;
+    private List<NamedLandingArea> namedLandingAreas;
+    private List<Topography> topographies;
 
-    private  List<MapName> mapNames;
+    private List<MapName> mapNames;
     private OperatorValue water;
     private OperatorValue concrete;
     private OperatorValue metals;
@@ -38,7 +38,7 @@ public class ComplexFilterRequest {
         breakthroughs = List.of();
         topographies = List.of();
         namedLandingAreas = List.of();
-        mapNames=List.of();
+        mapNames = List.of();
         water = new OperatorValue();
         concrete = new OperatorValue();
         metals = new OperatorValue();

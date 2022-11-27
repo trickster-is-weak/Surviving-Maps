@@ -40,7 +40,6 @@ public class ComplexController {
         ComplexFilterRequest filter = new ComplexFilterRequest();
         List<Breakthrough> breakthroughs = Breakthrough.filterVariant(filter.getVariant());
 
-
         mav.setViewName("complex");
         mav.addObject(FILTER, filter);
         mav.addObject(BREAKTHROUGHS, breakthroughs);
@@ -64,6 +63,20 @@ public class ComplexController {
         mav.addObject(SITE_LIST, filtered);
         mav.addObject(BREAKTHROUGHS, breakthroughs);
         LOGGER.info("Filter completed");
+        return mav;
+    }
+
+    @GetMapping("/reloadComplexForm")
+    public ModelAndView reloadComplexForm(@ModelAttribute ComplexFilterRequest filter) {
+
+        List<Breakthrough> breakthroughs = Breakthrough.filterVariant(filter.getVariant());
+        List<Site> filtered = filterService.filter(filter);
+        variant = filter.getVariant();
+        mav.setViewName("fragments/complexFragments :: filter");
+        mav.addObject(FILTER, filter);
+        mav.addObject(SITE_LIST, filtered);
+        mav.addObject(BREAKTHROUGHS, breakthroughs);
+
         return mav;
     }
 

@@ -1,63 +1,63 @@
 package uk.co.brett.surviving.io;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.hash.Hashing;
-import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
-import uk.co.brett.surviving.config.TestConfig;
-import uk.co.brett.surviving.enums.GameVariant;
+import uk.co.brett.surviving.io.file.FileHashes;
+import uk.co.brett.surviving.io.repo.InputHashRepo;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
-import java.util.Map;
-
-@SpringBootTest(classes = TestConfig.class)
+@SpringBootTest//(classes = UnitTestConfig.class)
 class InputExistsTest {
 
     @Autowired
     ConfigurableApplicationContext applicationContext;
 
     @Autowired
-    private InputService inputService;
-
+    IngestService ingestService;
     @Autowired
-    private IngestChecker ingestChecker;
+    InputHashRepo hashRepo;
+    @Autowired
+    private FileHashes fileHashes;
 
-    @Test
-    public void test() throws NoSuchAlgorithmException, IOException {
 
-        Map<GameVariant, InputFile> map = inputService.getMap();
-        map.forEach((key, value) -> System.out.println(value.getHash()));
+//    @Test
+//    void test() throws IOException {
+//
+//        Map<GameVariant, InputFile> map = fileHashes.getMap();
+//
+//        for (GameVariant variant : GameVariant.values()) {
+//
+//            String s = map.get(variant).getResourceLocation();
+//            String originalString = IOUtils.resourceToString(s, StandardCharsets.UTF_8);
+//
+//            String sha256hex = Hashing.sha256()
+//                    .hashString(originalString, StandardCharsets.UTF_8)
+//                    .toString();
+//
+//            System.out.println(variant);
+//            System.out.println("Pre-hashed:  " + map.get(variant).getHash());
+//            System.out.println("Post-hashed: " + sha256hex);
+//
+//            System.out.println();
+//        }
+//
+//    }
 
-        String s = map.get(GameVariant.STANDARD).getResourceLocation();
 
-//        InputStream stream = LandingSitesFlat.class.getResourceAsStream(s);
-
-        String originalString = IOUtils.resourceToString(s, StandardCharsets.UTF_8);
-
-        String sha256hex = Hashing.sha256()
-                .hashString(originalString, StandardCharsets.UTF_8)
-                .toString();
-
-        System.out.println(sha256hex);
-        System.out.println(map.get(GameVariant.STANDARD).getHash());
-
-        Ingest ingest = ImmutableIngest.builder().map(map).complete(true).build();
-        System.out.println(ingest);
-        FileWriter ingestFile = new FileWriter(inputService.getIngestCheck());
-        new ObjectMapper().writerWithDefaultPrettyPrinter().writeValue(ingestFile, ingest);
-        ingestFile.close();
-
-    }
-
-    @Test
-    public void ingest() {
-         
-    }
+//    @Test
+//    void populateIngestTable() {
+//        Map<GameVariant, InputFile> map = fileHashes.getMap();
+//
+//        for (GameVariant variant : GameVariant.values()) {
+//
+//            String filename = map.get(variant).getResourceLocation();
+//            String hash = map.get(variant).getHash();
+//            InputHash inputHash = new InputHash(variant, filename, hash);
+//            hashRepo.save(inputHash);
+//        }
+//
+//        hashRepo.flush();
+//
+//    }
 }
 

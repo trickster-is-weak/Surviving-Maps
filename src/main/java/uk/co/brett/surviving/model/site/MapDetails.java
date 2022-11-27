@@ -3,6 +3,7 @@ package uk.co.brett.surviving.model.site;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.Objects;
 import uk.co.brett.surviving.enums.MapName;
 import uk.co.brett.surviving.enums.NamedLandingArea;
 import uk.co.brett.surviving.enums.Topography;
@@ -129,5 +130,18 @@ public class MapDetails {
                 ", challengeDifficulty=" + challengeDifficulty +
                 ", mapName=" + mapName +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MapDetails that = (MapDetails) o;
+        return altitude == that.altitude && temperature == that.temperature && challengeDifficulty == that.challengeDifficulty && topography == that.topography && mapName == that.mapName && namedLocation == that.namedLocation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(altitude, temperature, challengeDifficulty, topography, mapName, namedLocation);
     }
 }

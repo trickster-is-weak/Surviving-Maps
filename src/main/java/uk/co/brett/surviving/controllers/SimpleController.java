@@ -80,8 +80,8 @@ public class SimpleController {
         } else {
             mav.setViewName("fragments/simpleFragments :: display");
             LOGGER.info("display variant {}", variant);
-            Site site = filterService.getSingle(id);
-            site.getBreakthroughs(variant);
+//            Site site = filterService.getSingle(id);
+//            site.getBreakthroughs(variant);
             mav.addObject(SITE, filterService.getSingle(id));
             mav.addObject("variant", variant);
             return mav;
@@ -94,14 +94,6 @@ public class SimpleController {
     public ModelAndView getData() {
         mav.setViewName("fragments/simpleFragments :: table");
         return mav.addObject(SITE_LIST, filterService.getAll());
-    }
-
-    @GetMapping("/updateBreakthroughs")
-    public ModelAndView updateBreakthroughs(@RequestParam(name = "variant") final GameVariant postedVariant) {
-        variant = postedVariant;
-        mav.setViewName("fragments/simpleFragments :: breakthroughs");
-        mav.addObject(BREAKTHROUGHS, Breakthrough.filterVariant(variant));
-        return mav;
     }
 
     @GetMapping("/reloadForm")

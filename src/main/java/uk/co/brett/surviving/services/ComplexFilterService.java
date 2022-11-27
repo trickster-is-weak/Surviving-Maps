@@ -30,7 +30,6 @@ public class ComplexFilterService {
 
     public List<Site> filter(ComplexFilterRequest request) {
         LOGGER.info(request);
-//        List<Long> list = customBreakthroughMapRepo.getIds(request);
         return customBreakthroughMapRepo.getIds(request);
     }
 }

@@ -1,7 +1,7 @@
 package uk.co.brett.surviving;
 
 import org.junit.jupiter.api.Test;
-import uk.co.brett.surviving.io.CsvReader;
+import uk.co.brett.surviving.io.file.CsvReader;
 
 import java.io.IOException;
 import java.io.Reader;

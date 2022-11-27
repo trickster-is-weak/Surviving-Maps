@@ -9,7 +9,12 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import uk.co.brett.surviving.enums.Breakthrough;
 import uk.co.brett.surviving.enums.GameVariant;
-import uk.co.brett.surviving.io.*;
+import uk.co.brett.surviving.io.ImmutableLandingSiteFlat;
+import uk.co.brett.surviving.io.IngestException;
+import uk.co.brett.surviving.io.LandingSiteFlat;
+import uk.co.brett.surviving.io.file.CsvReader;
+import uk.co.brett.surviving.io.file.FileHashes;
+import uk.co.brett.surviving.io.file.InputFile;
 import uk.co.brett.surviving.model.repo.BreakthroughMapRepo;
 import uk.co.brett.surviving.model.repo.SiteRepo;
 import uk.co.brett.surviving.model.service.DisastersService;
@@ -36,7 +41,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
     private final BreakthroughMapRepo breakthroughMapRepo;
     private final ResourcesService resourcesService;
     private final DisastersService disastersService;
-    private final InputService inputFiles;
+    private final FileHashes inputFiles;
     private final ThreadPoolTaskExecutor ioPoolTaskExecutor;
     private Set<Resources> resourcesSet = new HashSet<>();
     private Set<Disasters> disastersSet = new HashSet<>();
@@ -44,7 +49,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
     private BiMap<Disasters, Long> disastersMap = HashBiMap.create();
     private Map<Breakthrough, Map<GameVariant, List<Long>>> superMap = new EnumMap<>(Breakthrough.class);
 
-    public LandingSitesFlat(SiteRepo siteRepo, BreakthroughMapRepo breakthroughMapRepo, ResourcesService resourcesService, DisastersService disastersService, InputService inputFiles, ThreadPoolTaskExecutor ioPoolTaskExecutor) {
+    public LandingSitesFlat(SiteRepo siteRepo, BreakthroughMapRepo breakthroughMapRepo, ResourcesService resourcesService, DisastersService disastersService, FileHashes inputFiles, ThreadPoolTaskExecutor ioPoolTaskExecutor) {
         this.siteRepo = siteRepo;
         this.breakthroughMapRepo = breakthroughMapRepo;
         this.resourcesService = resourcesService;
@@ -176,7 +181,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
             LOGGER.info("{} finished", file);
             return map;
         } catch (IOException e) {
-            throw new RuntimeException("IOE thrown in ingest");
+            throw new IngestException("IOE thrown in ingest");
         }
     }
 
@@ -207,7 +212,6 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
         disastersMap = null;
         superMap = null;
 
-        System.gc();
         LOGGER.info("--- destroy executed ---");
     }
 
@@ -217,12 +221,12 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         resourcesSet = null;
         disastersSet = null;
         resourcesMap = null;
         disastersMap = null;
         superMap = null;
-        System.gc();
+
     }
 }

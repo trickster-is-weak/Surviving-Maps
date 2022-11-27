@@ -13,7 +13,7 @@ function rowClicked(id, site) {
 
     $('#searchResultTable tbody > tr').removeClass('selected');
 
-    var obj;
+    let obj;
     if (selected) {
         obj = {'id': -1}
     } else {
@@ -88,8 +88,8 @@ $(document).ready(function () {
 
 function checkEnable(res) {
 
-    var op = '#' + res + 'Op';
-    var select = '#' + res;
+    let op = '#' + res + 'Op';
+    let select = '#' + res;
 
     console.log(res)
     if ($(op).val() === "NO_PREFERENCE") {
@@ -112,7 +112,6 @@ function setFormTriggers() {
     $('#resources').on("change", change)
     $('#example-reset').on("change", change)
     $('#mapDetails').on("change", change)
-
 }
 
 function fetchData() {
@@ -130,8 +129,6 @@ function fetchData() {
 }
 
 function successFn(msg) {
-    console.log("success table")
-    console.log(msg.toString().slice(0, 100))
     $("#tableDiv").html(msg);
     dataTableFormat();
     return true
@@ -147,7 +144,7 @@ let loading = "<tr>" +
     "</td>" +
     "</tr>";
 
-var change = function formChange() {
+let change = function formChange() {
     console.log("change fn")
     let form = $("#main_form");
     $("#tablebody").html(loading);
@@ -173,17 +170,33 @@ var change = function formChange() {
 };
 
 
+function checkEnabled() {
+    checkEnable("water")
+    checkEnable("concrete")
+    checkEnable("metal")
+    checkEnable("raremetal")
+    checkEnable("meteor")
+    checkEnable("coldwaves")
+    checkEnable("dustStorm")
+    checkEnable("dustDevil")
+}
+
 function reloadForm() {
     let form = $("#main_form");
-    console.log(form)
+
+    let complex = form.attr('action') === "/complex"
+    let url = complex ? "/reloadComplexForm" : "/reloadForm";
+
     $.ajax({
         type: "GET",
         data: form.serialize(),
-        url: "/reloadForm",
+        url: url,
         success: function (msg) {
             console.log("success reloadForm")
-            console.log(msg.toString().slice(0, 100))
+            // console.log(msg.toString().slice(0, 100))
             $("#formDiv").html(msg);
+            if (complex) checkEnabled()
+
             reloadMultiSelects()
             setFormTriggers()
             change();
@@ -195,6 +208,7 @@ function reloadForm() {
 }
 
 function reloadMultiSelects() {
+    console.log("reload multiselect")
     let btr = $('#example-reset');
     let nla = $('#landingArea-reset');
     let top = $('#topography-reset');

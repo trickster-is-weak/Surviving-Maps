@@ -36,5 +36,14 @@
       "Fixing bug with rare metals",
       "Adding complex filter functionality"
     ]
+  },
+  {
+    "date": "15 11 2022",
+    "items": [
+      "Fixing breakthrough bug in complex",
+      "Updating JavaScript functions for complex/simple",
+      "Changing functionality of Complex Filter to use QueryDSL",
+      "Adding database caching to speed up subsequent launches"
+    ]
   }
 ]

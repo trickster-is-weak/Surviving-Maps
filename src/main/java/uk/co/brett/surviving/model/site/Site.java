@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uk.co.brett.surviving.enums.Breakthrough;
@@ -185,4 +186,16 @@ public class Site {
         return breakthroughHashMap.getOrDefault(variant, breakthroughHashMap.get(STANDARD)).getList();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Site site = (Site) o;
+        return latitude == site.latitude && longitude == site.longitude && Objects.equal(id, site.id) && northSouth == site.northSouth && eastWest == site.eastWest;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id, latitude, northSouth, longitude, eastWest);
+    }
 }

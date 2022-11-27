@@ -6,23 +6,15 @@ buildscript {
 plugins {
     id "org.sonarqube" version "3.3"
     id 'org.springframework.boot' version '2.6.7'
-    id "nebula.lint" version "17.7.0"
 }
-
 apply plugin: "application"
 apply plugin: 'jacoco'
 apply plugin: "java"
 apply plugin: "war"
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
-allprojects {
-    apply plugin: "java"
-    apply plugin: "nebula.lint"
-    gradleLint {
-        rules = ['unused-dependency']
-    }
-}
-project.version = "0.5"
+
+project.version = "0.6"
 
 repositories {
     mavenCentral()
@@ -32,49 +24,37 @@ dependencies {
 
     annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jpa",
             "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final",
-            "javax.annotation:javax.annotation-api:1.3.2", "org.immutables:value:2.9.0")
-    implementation "org.immutables:value-annotations:2.9.0"
-    implementation "org.immutables:gson:2.9.0"
+            "javax.annotation:javax.annotation-api:1.3.2", 'org.immutables:value:2.9.2')
+    implementation 'org.immutables:value-annotations:2.9.2'
+    implementation 'org.immutables:gson:2.9.2'
 
-    implementation 'org.apache.commons:commons-csv:1.8'
+    implementation 'org.apache.commons:commons-csv:1.9.0'
     implementation 'org.apache.commons:commons-math3:3.6.1'
-    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'org.apache.commons:commons-text:1.10.0'
 
     implementation 'com.querydsl:querydsl-core:5.0.0'
     implementation 'com.querydsl:querydsl-jpa:5.0.0'
-//    implementation 'com.blazebit:blaze-persistence-integration-querydsl-expressions:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-integration-hibernate-5.6:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-integration-spring-data-2.0:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-integration-spring-data-webmvc:1.6.7'
-//    runtimeOnly 'com.blazebit:blaze-persistence-entity-view-impl:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-core-api:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-core-impl:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-integration-entity-view-spring:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-entity-view-api:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-entity-view-impl:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-entity-view-processor:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-integration-entity-view-spring:1.6.7'
-//    implementation 'com.blazebit:blaze-persistence-integration-spring-data-2.4:1.6.7'
-
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.7.0'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.3'
-    implementation 'org.assertj:assertj-core:3.16.1'
-    implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.0'
+    implementation 'org.assertj:assertj-core:3.23.1'
+    implementation 'com.google.guava:guava:31.1-jre'
 
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
-    implementation 'org.javassist:javassist:3.25.0-GA'
+    implementation 'org.javassist:javassist:3.29.2-GA'
 
 
-    implementation 'com.h2database:h2:1.4.200'
+    implementation 'com.h2database:h2:2.1.214'
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.13.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.14.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -82,9 +62,11 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2'
 
-    testAnnotationProcessor "org.immutables:value:2.9.0"
-    testImplementation "org.immutables:value-annotations:2.9.0"
-    testImplementation "org.immutables:gson:2.9.0"
+    testAnnotationProcessor("com.querydsl:querydsl-apt:5.0.0:jpa",
+            "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final",
+            "javax.annotation:javax.annotation-api:1.3.2", 'org.immutables:value:2.9.2')
+    testImplementation 'org.immutables:value-annotations:2.9.2'
+    testImplementation 'org.immutables:gson:2.9.2'
 
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
@@ -93,6 +75,8 @@ dependencies {
 
 
 }
+
+
 configurations {
     all {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'

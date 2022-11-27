@@ -59,11 +59,11 @@ public class SimpleFilterRequest {
     @Override
     public String toString() {
         return "SimpleFilterRequest{" +
-                "\nvariant=" + variant +
-                ", \nresources=" + resources +
-                ", \ndisasters=" + disasters +
-                ", \nbreakthroughs=" + breakthroughs +
-                "\n}";
+                "variant=" + variant +
+                ", resources=" + resources +
+                ", disasters=" + disasters +
+                ", breakthroughs=" + breakthroughs +
+                "}";
     }
 
     @Override

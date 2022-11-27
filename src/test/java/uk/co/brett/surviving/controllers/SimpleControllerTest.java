@@ -6,24 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
-import uk.co.brett.surviving.LandingSiteTestUtil;
 import uk.co.brett.surviving.enums.Breakthrough;
-import uk.co.brett.surviving.enums.GameVariant;
 import uk.co.brett.surviving.filters.SimpleFilterRequest;
-import uk.co.brett.surviving.io.LandingSiteFlat;
 import uk.co.brett.surviving.model.repo.DisastersRepo;
 import uk.co.brett.surviving.model.repo.ResourcesRepo;
 import uk.co.brett.surviving.model.service.SiteService;
-import uk.co.brett.surviving.model.site.Disasters;
-import uk.co.brett.surviving.model.site.Resources;
 import uk.co.brett.surviving.model.site.Site;
 import uk.co.brett.surviving.services.SimpleFilterService;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static uk.co.brett.surviving.enums.GameVariant.GREEN_PLANET;
 import static uk.co.brett.surviving.enums.GameVariant.STANDARD;
 
@@ -46,11 +42,17 @@ class SimpleControllerTest {
 
     private ModelAndView mav;
 
+    private Site site;
 
     @BeforeEach
     void setUp() {
         SimpleFilterService mock = mock(SimpleFilterService.class);
         controller = new SimpleController(mock);
+        site = mock(Site.class);
+        List<Site> sites = List.of(site);
+        when(mock.getAll()).thenReturn(sites);
+        when(mock.getSingle(any())).thenReturn(site);
+
     }
 
     @Test
@@ -74,7 +76,7 @@ class SimpleControllerTest {
     @Test
     @Transactional
     void display() {
-        Site site = siteService.fetchSites(1).get(0);
+//        Site site = siteService.fetchSites(1).get(0);
         Long id = site.getId();
         mav = controller.display(id);
 
@@ -89,17 +91,17 @@ class SimpleControllerTest {
 
     @Test
     void getData() {
-        LandingSiteFlat flat = LandingSiteTestUtil.getLandingSite();
-        Map<GameVariant, List<Breakthrough>> btrVarMap = LandingSiteTestUtil.breakthroughMap();
+//        LandingSiteFlat flat = LandingSiteTestUtil.getLandingSite();
+//        Map<GameVariant, List<Breakthrough>> btrVarMap = LandingSiteTestUtil.breakthroughMap();
+//
+//        Resources r = resourcesRepo.save(new Resources(flat));
+//        Disasters d = disastersRepo.save(new Disasters(flat));
+//
+//        Site site = new Site(flat, btrVarMap);
+//        site.setDisasters(d);
+//        site.setResources(r);
+//        siteService.saveSite(site);
 
-        Resources r = resourcesRepo.save(new Resources(flat));
-        Disasters d = disastersRepo.save(new Disasters(flat));
-
-
-        Site site = new Site(flat, btrVarMap);
-        site.setDisasters(d);
-        site.setResources(r);
-        site = siteService.saveSite(site);
 
         mav = controller.getData();
 
@@ -113,15 +115,15 @@ class SimpleControllerTest {
 
     }
 
-    @Test
-    void updateBreakthroughs() {
-        GameVariant variant = STANDARD;
-        mav = controller.updateBreakthroughs(variant);
-        List<Breakthrough> exp = Breakthrough.filterVariant(variant);
-
-        assertThat(mav.getViewName()).isEqualTo("fragments/simpleFragments :: breakthroughs");
-        assertThat(mav.getModel()).containsEntry("breakthroughs", exp);
-    }
+//    @Test
+//    void updateBreakthroughs() {
+//        GameVariant variant = STANDARD;
+//        mav = controller.updateBreakthroughs(variant);
+//        List<Breakthrough> exp = Breakthrough.filterVariant(variant);
+//
+//        assertThat(mav.getViewName()).isEqualTo("fragments/simpleFragments :: breakthroughs");
+//        assertThat(mav.getModel()).containsEntry("breakthroughs", exp);
+//    }
 
     @Test
     void reloadForm() {
