@@ -65,6 +65,7 @@ docker kill web
 docker rm web
 ```
 
+**If you don't have docker, use the following steps**
 ### Precursors
 So the app needs things installed on your local machine before it will work: Java and Gradle.
 0. Some engineering spirit and appetite for risk
