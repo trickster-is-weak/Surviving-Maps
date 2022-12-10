@@ -20,6 +20,51 @@ Version 0.6: 27/11/2022
 
 ## How do I install it?
 
+### Downloading the Code
+
+As should be said with any code run from the internet, there are risks involved. I haven't tested this on any machines
+but my own.
+This is the point where you are downloading and running software that is unverified and probably contains bugs.
+Java's Virtual Machine should prevent these bugs causing system instabilities, but I take no responsibility whatsoever.
+
+The complete code can be downloaded from the green "code" button on
+the [github page](https://github.com/trickster-is-weak/Surviving-Maps). You can then choose to download the code as a
+zip, or using git if you have that installed. After you have it downloaded and unzipped, open a Terminal/Command Prompt
+at this location.
+
+### Using docker
+If you have docker configured on your system the process to install this game is fairly simple. Just open a Terminal/Command Prompt
+at Surviving-Maps folder and execute the following command.
+
+```shell
+docker build --file=Dockerfile  -t SurvivingMaps .
+```
+You will notice the code getting compiled and may take few minutes to complete, this will happen only for the first time to generate docker image, also
+remember that this command should only be executed once just to create the image. After the compilation is successfull, execute the next command.
+
+```shell
+docker run -it -p 80:80 --name web SurvivingMaps
+```
+This command should be used everytime you want to start the game.
+
+This should start printing a load of stuff out on the screen such as files it's reading, and other logging information.
+
+When it stops, it will probably have something like 
+
+```shell
+[INFO ] 2022-11-10 19:53:38.431 [restartedMain] SpringApplication - Started SpringApplication in 10.892 seconds (JVM running for 12.011)
+<=======------> 60% EXECUTING [11m 59s]
+> :run
+```
+Now we can go to our browser and navigate to "http://localhost". This should load the splash page and the page is lauched successfuly.
+
+To exit, you can close the webpage and execute the following commands
+
+```shell
+docker kill web
+docker rm web
+```
+
 ### Precursors
 So the app needs things installed on your local machine before it will work: Java and Gradle.
 0. Some engineering spirit and appetite for risk
@@ -62,19 +107,6 @@ Ant:          Apache Ant(TM) version 1.10.11 compiled on July 10 2021
 JVM:          18.0.1.1 (Homebrew 18.0.1.1+0)
 OS:           Mac OS X 12.6.1 x86_64
 ```
-
-
-### Downloading the Code
-
-As should be said with any code run from the internet, there are risks involved. I haven't tested this on any machines
-but my own.
-This is the point where you are downloading and running software that is unverified and probably contains bugs.
-Java's Virtual Machine should prevent these bugs causing system instabilities, but I take no responsibility whatsoever.
-
-The complete code can be downloaded from the green "code" button on
-the [github page](https://github.com/trickster-is-weak/Surviving-Maps). You can then choose to download the code as a
-zip, or using git if you have that installed. After you have it downloaded and unzipped, open a Terminal/Command Prompt
-at this location.
 
 #### Verification
 
